@@ -1,0 +1,34 @@
+class Chatbot:
+    def __init__(me):
+        me.memory = {}
+
+    def learn_from_user(me, user_input, response):
+        me.memory[user_input] = response
+
+    def generate_response(me, user_input):
+        if user_input in me.memory:
+            return me.memory[user_input]
+        else:
+            return "I'm not sure how to respond to that."
+
+def main():
+    chatbot = Chatbot()
+    print("Chatbot: Hello! Type 'exit' to end the conversation.")
+
+    while True:
+        user_input = input("You: ")
+
+        if user_input.lower() == "exit":
+            print("Chatbot: Goodbye!, have a nice day!")
+            break
+
+        if user_input in chatbot.memory:
+            print("Chatbot:", chatbot.generate_response(user_input))
+        else:
+            print("Chatbot: I'm not sure how to respond to that. Can you teach me?")
+
+        user_response = input("You (teach me): ")
+        chatbot.learn_from_user(user_input, user_response)
+
+if __name__ == "__main__":
+    main()
